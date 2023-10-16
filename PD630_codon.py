@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import os
 import re
+# --- 部署的位置 --- #
+# https://pd630codon.streamlit.app/
 # 确定宿主
 suzhu = "Rhodococcus opacus PD630"
 # 确定密码子打分表

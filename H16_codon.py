@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import os
 import re
+# --- 部署的位置 --- #
+# https://h16codon.streamlit.app/
 # 确定宿主
 suzhu = "Cupriavidus necator H16"
 # 确定密码子打分表

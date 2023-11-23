@@ -162,3 +162,4 @@ if uploaded_file is not None:
     
 st.sidebar.write("""## 模式生物的分析""")
 st.sidebar.write("[外链侵权删](http://www.detaibio.com/tools/rare-codon-analyzer.html)")
+st.sidebar.write("[欢迎留言提建议](https://codonmessage.streamlit.app)")

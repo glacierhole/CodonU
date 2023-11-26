@@ -2,9 +2,8 @@ import streamlit as st
 import pandas as pd
 import os
 import re
-from webdav4.client import Client
 # --- 版本介绍 --- #
-# 版本3.2 将codonset进行隐私处理
+# 版本3.1 模块化代码,attention大变
 # --- 部署的位置 --- #
 # https://cyjcodon.streamlit.app/
 # --- 更改的编辑部分 --- #
@@ -13,16 +12,8 @@ suzhu = "Cyberlindnera jadinii"
 suzhuweb = "https://www.ncbi.nlm.nih.gov/datasets/genome/?taxon=4903"
 suzhucodon = "codonset-cyj.txt"
 suzhudataset = "GCA_001661405.1"
-remote_codonset_path = f"/streamlit_app/CodonU/codonset/{suzhucodon}"
 # 确定文件上传的位置
 weizhi = "/streamlit_app/CodonU/cyj"
-
-# --- 实现文件后台 --- #
-def sqldev_start():
-    JIANGUO_NAME = st.secrets["JIANGUO_NAME"]
-    JIANGUO_TOKEN = st.secrets["JIANGUO_TOKEN"]
-    client = Client(base_url='https://dav.jianguoyun.com/dav/',
-                    auth=(JIANGUO_NAME, JIANGUO_TOKEN))
 # --- 程序的主体部分 --- #
 def main():
     # 基本信息介绍
@@ -51,7 +42,12 @@ with st.sidebar:
     st.write("""## 模式生物的分析""")
     st.write("[外链侵权删](http://www.detaibio.com/tools/rare-codon-analyzer.html)")
     st.write("[欢迎留言提建议](https://codonmessage.streamlit.app)")
-
+# --- 实现文件后台 --- #
+from webdav4.client import Client
+JIANGUO_NAME = st.secrets["JIANGUO_NAME"]
+JIANGUO_TOKEN = st.secrets["JIANGUO_TOKEN"]
+client = Client(base_url='https://dav.jianguoyun.com/dav/',
+                auth=(JIANGUO_NAME, JIANGUO_TOKEN))
 def save_file(uploaded_file):
     file_name = uploaded_file.name
     st.write(f"已上传文件名: {file_name}")
@@ -61,7 +57,6 @@ def save_file(uploaded_file):
     # 云盘后台保存
     remote_file_path = os.path.join(weizhi, file_name)
     local_file_path = file_path
-    sqldev_start()
     client.upload_file(from_path=local_file_path, to_path=remote_file_path, overwrite=True)
     return file_path
 def start_analysis2(file_path,uploaded_file):
@@ -98,12 +93,8 @@ def data_slicing1(seq_input_upper):
         codons.append(codon)
     codons
     return codons
-def codonset_show(remote_codonset_path):
+def codonset_show():
     st.write(f"""### 显示{suzhu}密码子打分表""")
-    sqldev_start()
-    remote_codonset_path 
-    local_codonset_path = f"data/{suzhucodon}"
-    client.download_file(remote_codonset_path, to_path=local_codonset_path)
     codonset = pd.read_csv(f'data/{suzhucodon}', sep='\t', header=None)
     codonset.columns = ['codon', 'abbc', 'num', 'percent', 'percent100', 'score']
     codonset

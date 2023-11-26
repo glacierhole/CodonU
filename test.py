@@ -35,7 +35,7 @@ with st.sidebar:
     if not os.path.exists("data"):
         os.makedirs("data")
     st.write("请上传fasta类型的文件,fastq和txt也可以")
-    uploaded_file = st.file_uploader("选择文件", type=["fasta","fastq","txt","dna"])
+    uploaded_file = st.file_uploader("选择文件", type=["fasta","fastq","txt"])
 
 # --- 实现文件后台 --- #
 # 云盘配置

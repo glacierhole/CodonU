@@ -28,10 +28,10 @@ with st.sidebar:
     st.image('picture/ulogo.png', use_column_width=True)
     st.write("""## 序列上传方式""")
     seq_input = st.text_input("请输入DNA序列")
-def start_analysis():
+def start_analysis(seq_input):
     st.write("""### 开始处理以下序列数据""")
-    seq_input = seq_input.upper()
-    seq_input
+    seq_input_upper = seq_input.upper()
+    seq_input_upper
 def data_slicing1():
     st.write("""### 将数据切割""")
     # 在这里执行下一步操作，例如将序列分成三联密码子
@@ -47,9 +47,7 @@ def codonset_show():
     df2.columns = ['codon', 'abbc', 'num', 'percent', 'percent100', 'score']
 # 检查是否有输入
 if seq_input:
-    st.write("""### 开始处理以下序列数据""")
-    seq_input = seq_input.upper()
-    seq_input
+    start_analysis(seq_input)
     data_slicing1()
     codonset_show()
     st.write("""### 数据打分""")

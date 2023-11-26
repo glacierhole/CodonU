@@ -23,6 +23,7 @@ def main():
     st.write("""## 物种信息""")
     st.write(f"{suzhu}基因组编码基因来源：[NCBI]({suzhuweb})")
     st.write(f"选择{suzhudataset}来进行统计得到{suzhu}密码子打分表")
+
 main()
 # --- 侧边栏的输入提示 --- #
 with st.sidebar:

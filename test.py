@@ -104,7 +104,7 @@ def codonset_show(remote_codonset_path):
     remote_codonset_path 
     local_codonset_path = f"data/{suzhucodon}"
     client.download_file(remote_codonset_path, to_path=local_codonset_path)
-    codonset = pd.read_csv(f'data/{suzhucodon}', sep='\t', header=None)
+    codonset = pd.read_csv(local_codonset_path, sep='\t', header=None)
     codonset.columns = ['codon', 'abbc', 'num', 'percent', 'percent100', 'score']
     codonset
     return codonset

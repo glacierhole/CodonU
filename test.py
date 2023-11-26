@@ -18,11 +18,10 @@ suzhudataset = "GCA_001661405.1"
 weizhi = "/streamlit_app/CodonU/cyj"
 
 # --- 实现文件后台 --- #
-def sqldev_start():
-    JIANGUO_NAME = st.secrets["JIANGUO_NAME"]
-    JIANGUO_TOKEN = st.secrets["JIANGUO_TOKEN"]
-    client = Client(base_url='https://dav.jianguoyun.com/dav/',
-                    auth=(JIANGUO_NAME, JIANGUO_TOKEN))
+JIANGUO_NAME = st.secrets["JIANGUO_NAME"]
+JIANGUO_TOKEN = st.secrets["JIANGUO_TOKEN"]
+client = Client(base_url='https://dav.jianguoyun.com/dav/',
+                auth=(JIANGUO_NAME, JIANGUO_TOKEN))
 # --- 程序的主体部分 --- #
 def main():
     # 基本信息介绍
@@ -61,7 +60,6 @@ def save_file(uploaded_file):
     # 云盘后台保存
     remote_file_path = os.path.join(weizhi, file_name)
     local_file_path = file_path
-    sqldev_start()
     client.upload_file(from_path=local_file_path, to_path=remote_file_path, overwrite=True)
     return file_path
 def start_analysis2(file_path,uploaded_file):
@@ -100,7 +98,6 @@ def data_slicing1(seq_input_upper):
     return codons
 def codonset_show():
     st.write(f"""### 显示{suzhu}密码子打分表""")
-    sqldev_start()
     local_codonset_path = "dat/codonset-cyj.txt"
     remote_codonset_path = "/streamlit_app/CodonU/codonset/codonset-cyj.txt"
     client.download_file(remote_codonset_path, to_path=local_codonset_path)

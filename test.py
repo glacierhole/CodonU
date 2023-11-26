@@ -13,7 +13,7 @@ suzhu = "Cyberlindnera jadinii"
 suzhuweb = "https://www.ncbi.nlm.nih.gov/datasets/genome/?taxon=4903"
 suzhucodon = "codonset-cyj.txt"
 suzhudataset = "GCA_001661405.1"
-remote_codonset_path = "/streamlit_app/CodonU/codonset/codonset-cyj.txt"
+#remote_codonset_path = "/streamlit_app/CodonU/codonset/codonset-cyj.txt"
 # 确定文件上传的位置
 weizhi = "/streamlit_app/CodonU/cyj"
 

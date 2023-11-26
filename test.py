@@ -36,7 +36,6 @@ def start_analysis(seq_input):
 def data_slicing1(seq_input_upper):
     st.write("""### 将数据切割""")
     # 在这里执行下一步操作，例如将序列分成三联密码子
-    codons
     codons = []
     for i in range(0, len(seq_input_upper), 3):
         codon = seq_input_upper[i:i+3]

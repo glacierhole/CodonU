@@ -23,15 +23,18 @@ def main():
     st.write("""## 物种信息""")
     st.write(f"{suzhu}基因组编码基因来源：[NCBI]({suzhuweb})")
     st.write(f"选择{suzhudataset}来进行统计得到{suzhu}密码子打分表")
+# --- 侧边栏的输入提示 --- #
 with st.sidebar:
     st.image('picture/ulogo.png', use_column_width=True)
     st.write("""## 序列上传方式""")
     seq_input = st.text_input("请输入DNA序列")
-# 检查是否有输入
-if seq_input:
+def start_analysis():
     st.write("""### 开始处理以下序列数据""")
     seq_input = seq_input.upper()
     seq_input
+# 检查是否有输入
+if seq_input:
+    start_analysis()
     st.write("""### 将数据切割""")
     # 在这里执行下一步操作，例如将序列分成三联密码子
     codons = []

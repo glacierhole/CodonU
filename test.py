@@ -27,12 +27,14 @@ def main():
 with st.sidebar:
     st.image('picture/ulogo.png', use_column_width=True)
     st.write("""## 序列上传方式""")
-    seq_input = st.text_input("请输入DNA序列")
+seq_input = st.sidebar.text_input("请输入DNA序列")
+
 def start_analysis(seq_input):
     st.write("""### 开始处理以下序列数据""")
     seq_input_upper = seq_input.upper()
     seq_input_upper
     return seq_input_upper
+
 def data_slicing1(seq_input_upper):
     st.write("""### 将数据切割""")
     # 在这里执行下一步操作，例如将序列分成三联密码子
@@ -42,12 +44,14 @@ def data_slicing1(seq_input_upper):
         codons.append(codon)
     codons
     return codons
+
 def codonset_show():
     st.write(f"""### 显示{suzhu}密码子打分表""")
     codonset = pd.read_csv(f'data/{suzhucodon}', sep='\t', header=None)
     codonset.columns = ['codon', 'abbc', 'num', 'percent', 'percent100', 'score']
     codonset
     return codonset
+
 def cal_score(codons,codonset):
     st.write("""### 数据打分""")
     scores = []
@@ -66,9 +70,11 @@ def cal_score(codons,codonset):
     df_scores = pd.DataFrame(scores)
     df_scores
     return df_scores
+
 def bar_chart(df_scores):
     st.write("""### 打分条形图""")
     df_scores['score'] = df_scores['score'].astype(float)
+
 def stacking_diagram():
 
 # 检查是否有输入
@@ -78,7 +84,6 @@ if seq_input:
     codonset = codonset_show()
     df_scores =cal_score(codons,codonset)
     bar_chart(df_scores)
-    
     st.bar_chart(df_scores, x='num', y='score')
     st.write("""### 打分堆积图""")
     st.bar_chart(df_scores, x='codon', y='score')

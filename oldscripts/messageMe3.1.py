@@ -9,10 +9,8 @@ from datetime import timezone
 
 ########3.1目标规范留言时间
 # username 为坚果云账号，password 为刚刚创建的密码
-JIANGUO_NAME = st.secrets["JIANGUO_NAME"]
-JIANGUO_TOKEN = st.secrets["JIANGUO_TOKEN"]
 client = Client(base_url='https://dav.jianguoyun.com/dav/',
-                auth=(JIANGUO_NAME, JIANGUO_TOKEN))
+                auth=('1761883025@qq.com', 'a9nbbqzab9pynygj'))
 
 # 指定本地保存下载文件的路径
 remote_file_path = '/streamlit_app/codonMessage.txt'

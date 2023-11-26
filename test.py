@@ -166,7 +166,7 @@ if uploaded_file is not None:
     file_path = save_file(uploaded_file)
     seq_df= start_analysis2(file_path,uploaded_file)
     codons=data_slicing2(seq_df)
-    codonset = codonset_show()
+    codonset = codonset_show(remote_codonset_path)
     df_scores =cal_score(codons,codonset)
     bar_chart(df_scores)
     stacking_diagram(df_scores)
@@ -176,7 +176,7 @@ if uploaded_file is not None:
 if seq_input:
     seq_input_upper = start_analysis1(seq_input)
     codons = data_slicing1(seq_input_upper)
-    codonset = codonset_show()
+    codonset = codonset_show(remote_codonset_path)
     df_scores =cal_score(codons,codonset)
     bar_chart(df_scores)
     stacking_diagram(df_scores)

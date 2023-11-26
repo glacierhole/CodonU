@@ -45,8 +45,9 @@ def data_slicing1(seq_input_upper):
 def codonset_show():
     st.write(f"""### 显示{suzhu}密码子打分表""")
     df2 = pd.read_csv(f'data/{suzhucodon}', sep='\t', header=None)
-    df2
     df2.columns = ['codon', 'abbc', 'num', 'percent', 'percent100', 'score']
+    df2
+    
 # 检查是否有输入
 if seq_input:
     seq_input_upper = start_analysis(seq_input)

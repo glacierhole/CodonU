@@ -2,26 +2,20 @@ import streamlit as st
 import pandas as pd
 import os
 import re
-# --- 版本介绍 --- #
-# 版本3.1 模块化代码
+
+# 版本3.0 目标加后台
 # --- 部署的位置 --- #
 # https://cyjcodon.streamlit.app/
-# --- 更改的编辑部分 --- #
 # 确定宿主
 suzhu = "Cyberlindnera jadinii"
-# 确定宿主网址
-suzhuweb = "https://www.ncbi.nlm.nih.gov/datasets/genome/?taxon=4903"
 # 确定密码子打分表
 suzhucodon = "codonset-cyj.txt"
-# 确定文件上传的位置
 weizhi = "/streamlit_app/CodonU/cyj"
-# --- 程序的主体部分 --- #
-def main():
-    st.title(f"这是一个{suzhu}宿主的密码子偏好性预测程序")
-    st.write("作者：饶一率")
-    st.write("时间：2023-09-16")
-    st.write("""## 物种信息""")
-    st.write(f"{suzhu}基因组编码基因来源：[NCBI]({suzhuweb})")
+st.title(f"这是一个{suzhu}宿主的密码子偏好性预测程序")
+st.write("作者：饶一率")
+st.write("时间：2023-09-16")
+st.write("""## 物种信息""")
+st.write(f"{suzhu}基因组编码基因来源：[NCBI](https://www.ncbi.nlm.nih.gov/datasets/genome/?taxon=4903)")
 st.write(f"选择GCA_001661405.1来进行统计得到{suzhu}密码子打分表")
 st.sidebar.image('picture/ulogo.png', use_column_width=True)
 st.sidebar.write("""## 序列上传方式1""")

@@ -27,7 +27,7 @@ def main():
 with st.sidebar:
     st.image('picture/ulogo.png', use_column_width=True)
     st.write("""## 序列上传方式""")
-seq_input = st.sidebar.text_input("请输入DNA序列")
+    seq_input = st.text_input("请输入DNA序列")
 
 def start_analysis(seq_input):
     st.write("""### 开始处理以下序列数据""")
@@ -74,20 +74,16 @@ def cal_score(codons,codonset):
 def bar_chart(df_scores):
     st.write("""### 打分条形图""")
     df_scores['score'] = df_scores['score'].astype(float)
-
-def stacking_diagram():
-
-# 检查是否有输入
-if seq_input:
-    seq_input_upper = start_analysis(seq_input)
-    codons = data_slicing1(seq_input_upper)
-    codonset = codonset_show()
-    df_scores =cal_score(codons,codonset)
-    bar_chart(df_scores)
     st.bar_chart(df_scores, x='num', y='score')
+
+def stacking_diagram(df_scores):
     st.write("""### 打分堆积图""")
+    df_scores['score'] = df_scores['score'].astype(float)
     st.bar_chart(df_scores, x='codon', y='score')
+
+def statistics_histogram(df_scores):
     st.write("""### 分数统计直方图""")
+    df_scores['score'] = df_scores['score'].astype(float)
     counts = {'0-10': 0, '11-20': 0, '21-30': 0, '31-40': 0, '41-50': 0, '51-60': 0, '61-70': 0, '71-80': 0, '81-90': 0, '91-100': 0}
     for score in df_scores['score'].values:
         if 0 <= score <= 10:
@@ -111,6 +107,17 @@ if seq_input:
         elif 91 <= score <= 100:
             counts['91-100'] += 1
     st.bar_chart(counts)
+
+# 检查是否有输入
+if seq_input:
+    seq_input_upper = start_analysis(seq_input)
+    codons = data_slicing1(seq_input_upper)
+    codonset = codonset_show()
+    df_scores =cal_score(codons,codonset)
+    bar_chart(df_scores)
+    stacking_diagram(df_scores)
+    statistics_histogram(df_scores)
+    
 else:
     st.sidebar.warning("请输入DNA序列")
 

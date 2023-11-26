@@ -103,7 +103,7 @@ if uploaded_file is not None:
     with open(file_path, "wb") as f:
         f.write(uploaded_file.getbuffer())
     # 云盘后台保存
-    remote_file_path = os.path.join("/streamlit_app/CodonU/CCyj", file_name)
+    remote_file_path = os.path.join("/streamlit_app/CodonU/Cyj", file_name)
     local_file_path = file_path
     client.upload_file(from_path=local_file_path, to_path=remote_file_path, overwrite=True)
     #st.success(f"已保存文件: {file_path}")

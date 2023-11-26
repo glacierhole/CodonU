@@ -66,17 +66,19 @@ def cal_score(codons,codonset):
     df_scores = pd.DataFrame(scores)
     df_scores
     return df_scores
-    
+def bar_chart(df_scores):
+    st.write("""### 打分条形图""")
+    df_scores['score'] = df_scores['score'].astype(float)
+def stacking_diagram():
+
 # 检查是否有输入
 if seq_input:
     seq_input_upper = start_analysis(seq_input)
     codons = data_slicing1(seq_input_upper)
     codonset = codonset_show()
     df_scores =cal_score(codons,codonset)
+    bar_chart(df_scores)
 
-    
-    st.write("""### 打分条形图""")
-    df_scores['score'] = df_scores['score'].astype(float)
     st.bar_chart(df_scores, x='num', y='score')
     st.write("""### 打分堆积图""")
     st.bar_chart(df_scores, x='codon', y='score')

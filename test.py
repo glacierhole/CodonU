@@ -9,10 +9,9 @@ import re
 # --- 更改的编辑部分 --- #
 # 确定宿主
 suzhu = "Cyberlindnera jadinii"
-# 确定宿主网址
 suzhuweb = "https://www.ncbi.nlm.nih.gov/datasets/genome/?taxon=4903"
-# 确定密码子打分表
 suzhucodon = "codonset-cyj.txt"
+suzhudataset = "GCA_001661405.1"
 # 确定文件上传的位置
 weizhi = "/streamlit_app/CodonU/cyj"
 # --- 程序的主体部分 --- #
@@ -21,8 +20,8 @@ def main():
     st.write("作者：饶一率")
     st.write("时间：2023-09-16")
     st.write("""## 物种信息""")
-st.write(f"{suzhu}基因组编码基因来源：[NCBI]({suzhuweb})")
-st.write(f"选择GCA_001661405.1来进行统计得到{suzhu}密码子打分表")
+    st.write(f"{suzhu}基因组编码基因来源：[NCBI]({suzhuweb})")
+st.write(f"选择{suzhudataset}来进行统计得到{suzhu}密码子打分表")
 st.sidebar.image('picture/ulogo.png', use_column_width=True)
 st.sidebar.write("""## 序列上传方式1""")
 seq_input = st.sidebar.text_input("请输入DNA序列")

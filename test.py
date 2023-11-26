@@ -44,15 +44,11 @@ def data_slicing1(seq_input_upper):
     return codons
 def codonset_show():
     st.write(f"""### 显示{suzhu}密码子打分表""")
-    df2 = pd.read_csv(f'data/{suzhucodon}', sep='\t', header=None)
-    df2.columns = ['codon', 'abbc', 'num', 'percent', 'percent100', 'score']
-    df2
-    
-# 检查是否有输入
-if seq_input:
-    seq_input_upper = start_analysis(seq_input)
-    codons = data_slicing1(seq_input_upper)
-    codonset_show()
+    codonset = pd.read_csv(f'data/{suzhucodon}', sep='\t', header=None)
+    codonset.columns = ['codon', 'abbc', 'num', 'percent', 'percent100', 'score']
+    codonset
+    return codonset
+def cal_score(codons,codonset):
     st.write("""### 数据打分""")
     scores = []
     not_found = []
@@ -60,15 +56,25 @@ if seq_input:
     num = 0
     for c in codons:
         c = c.upper()
-        if c in df2['codon'].values:
+        if c in codonset['codon'].values:
             num += 1
-            score = df2.loc[df2['codon'] == c, 'score'].values[0]
+            score = codonset.loc[codonset['codon'] == c, 'score'].values[0]
             scores.append({'num': num, 'codon': c, 'score': score})
         else:
             not_found.append(c)
     #scores
     df_scores = pd.DataFrame(scores)
     df_scores
+    return df_scores
+    
+# 检查是否有输入
+if seq_input:
+    seq_input_upper = start_analysis(seq_input)
+    codons = data_slicing1(seq_input_upper)
+    codonset = codonset_show()
+    df_scores =cal_score(codons,codonset)
+
+    
     st.write("""### 打分条形图""")
     df_scores['score'] = df_scores['score'].astype(float)
     st.bar_chart(df_scores, x='num', y='score')

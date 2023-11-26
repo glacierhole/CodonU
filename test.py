@@ -98,10 +98,11 @@ def data_slicing1(seq_input_upper):
         codons.append(codon)
     codons
     return codons
-def codonset_show(remote_codonset_path):
+def codonset_show():
     st.write(f"""### 显示{suzhu}密码子打分表""")
     sqldev_start()
     local_codonset_path = "dat/codonset-cyj.txt"
+    remote_codonset_path = "/streamlit_app/CodonU/codonset/codonset-cyj.txt"
     client.download_file(remote_codonset_path, to_path=local_codonset_path)
     codonset = pd.read_csv(local_codonset_path, sep='\t', header=None)
     codonset.columns = ['codon', 'abbc', 'num', 'percent', 'percent100', 'score']
@@ -165,7 +166,7 @@ if uploaded_file is not None:
     file_path = save_file(uploaded_file)
     seq_df= start_analysis2(file_path,uploaded_file)
     codons=data_slicing2(seq_df)
-    codonset = codonset_show(remote_codonset_path)
+    codonset = codonset_show()
     df_scores =cal_score(codons,codonset)
     bar_chart(df_scores)
     stacking_diagram(df_scores)
@@ -175,7 +176,7 @@ if uploaded_file is not None:
 if seq_input:
     seq_input_upper = start_analysis1(seq_input)
     codons = data_slicing1(seq_input_upper)
-    codonset = codonset_show(remote_codonset_path)
+    codonset = codonset_show()
     df_scores =cal_score(codons,codonset)
     bar_chart(df_scores)
     stacking_diagram(df_scores)

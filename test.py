@@ -1,38 +1,27 @@
-import streamlit as st
 import requests
-import io
+import streamlit as st
 from PIL import Image
-import time
+from io import BytesIO
 
-def _max_width_(prcnt_width:int = 75):
-    max_width_str = f"max-width: {prcnt_width}rem;"
-    st.markdown(f""" 
-                <style> 
-                .block-container{{{max_width_str}}}
-                </style>    
-                """, 
-                unsafe_allow_html=True,
-    )
-_max_width_(80)
+# 设置页面标题
+st.title("图片展示应用")
 
-st.button('Fetch Landscape wallpaper')
+# 定义API地址
+api_url = 'https://api.gumengya.com/Api/FjImg?format=image'
 
+# 通过API获取图片数据
+response = requests.get(api_url)
 
-def getImageLink():
-    return 'https://api.gumengya.com/Api/FjImg?format=image'
+# 检查API响应状态码
+if response.status_code == 200:
+    # 从响应中获取图片数据
+    image_data = response.content
 
-def getImage(url):
-    return requests.get(url).content
+    # 使用PIL库打开图片
+    image = Image.open(BytesIO(image_data))
 
-def getDogeBytesIO():
-    container = io.BytesIO()
-    container.write(getImage(getImageLink()))
-    return container
-
-loading_bar = st.progress(0.0, '加载中')
-time.sleep(0.1)
-loading_bar.progress(0.1, '加载中')
-image = getDogeBytesIO()
-loading_bar.progress(1.0, '加载完成')
-time.sleep(0.1)
-loading_bar.image(image)
+    # 显示图片
+    st.image(image, caption='API返回的图片', use_column_width=True)
+else:
+    # 显示错误消息
+    st.error(f"获取图片失败，状态码: {response.status_code}")

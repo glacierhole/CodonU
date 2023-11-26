@@ -55,8 +55,10 @@ def save_file(uploaded_file):
     local_file_path = file_path
     client.upload_file(from_path=local_file_path, to_path=remote_file_path, overwrite=True)
     return file_path
-def start_analysis2(file_path):
+def start_analysis2(file_path,uploaded_file):
     st.write("""### 开始处理以下序列数据""")
+    with open(file_path, "wb") as f:
+        f.write(uploaded_file.getbuffer())
     records = []
     with open(file_path) as f:
         for line in f:
@@ -72,7 +74,7 @@ def start_analysis2(file_path):
 # --- 上传文件进行分析 --- #
 if uploaded_file is not None: 
     file_path = save_file(uploaded_file)
-    df1= start_analysis2(file_path)
+    df1= start_analysis2(file_path,uploaded_file)
     st.write("""### 将数据切割""")
     codons = [df1['seq'][0][i:i+3] for i in range(0, len(df1['seq'][0]), 3)]
     codons

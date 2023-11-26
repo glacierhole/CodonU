@@ -32,10 +32,10 @@ def start_analysis(seq_input):
     st.write("""### 开始处理以下序列数据""")
     seq_input_upper = seq_input.upper()
     seq_input_upper
-def data_slicing1():
+def data_slicing1(seq_input_upper):
     st.write("""### 将数据切割""")
     # 在这里执行下一步操作，例如将序列分成三联密码子
-    global codons
+    codons
     codons = []
     for i in range(0, len(seq_input), 3):
         codon = seq_input[i:i+3]
@@ -49,7 +49,7 @@ def codonset_show():
 # 检查是否有输入
 if seq_input:
     start_analysis(seq_input)
-    data_slicing1()
+    data_slicing1(seq_input_upper)
     codonset_show()
     st.write("""### 数据打分""")
     scores = []

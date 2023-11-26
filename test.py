@@ -16,7 +16,7 @@ def _max_width_(prcnt_width:int = 75):
 _max_width_(80)
 
 # 使用 st.button 的返回值检测按钮是否被点击
-if st.button('点击找到R送你的一张风景图'):
+if st.button('点击找到X送你的一张风景图'):
     # 创建一个空的输出容器
     container = st.empty()
 

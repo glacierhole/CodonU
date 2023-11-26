@@ -101,7 +101,6 @@ def data_slicing1(seq_input_upper):
 def codonset_show(remote_codonset_path):
     st.write(f"""### 显示{suzhu}密码子打分表""")
     sqldev_start()
-    remote_codonset_path 
     local_codonset_path = f"data/{suzhucodon}"
     client.download_file(remote_codonset_path, to_path=local_codonset_path)
     codonset = pd.read_csv(local_codonset_path, sep='\t', header=None)

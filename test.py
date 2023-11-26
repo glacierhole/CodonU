@@ -25,7 +25,7 @@ def main():
     st.write(f"选择{suzhudataset}来进行统计得到{suzhu}密码子打分表")
 with st.sidebar:
     st.image('picture/ulogo.png', use_column_width=True)
-    st.write("""## 序列上传方式1""")
+    st.write("""## 序列上传方式""")
     seq_input = st.text_input("请输入DNA序列")
 # 检查是否有输入
 if seq_input:

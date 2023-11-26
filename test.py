@@ -32,9 +32,7 @@ def start_analysis():
     st.write("""### 开始处理以下序列数据""")
     seq_input = seq_input.upper()
     seq_input
-# 检查是否有输入
-if seq_input:
-    start_analysis()
+def data_slicing1():
     st.write("""### 将数据切割""")
     # 在这里执行下一步操作，例如将序列分成三联密码子
     codons = []
@@ -42,10 +40,16 @@ if seq_input:
         codon = seq_input[i:i+3]
         codons.append(codon)
     codons
+def codonset_show():
     st.write(f"""### 显示{suzhu}密码子打分表""")
     df2 = pd.read_csv(f'data/{suzhucodon}', sep='\t', header=None)
     df2
     df2.columns = ['codon', 'abbc', 'num', 'percent', 'percent100', 'score']
+# 检查是否有输入
+if seq_input:
+    start_analysis()
+    data_slicing1()
+    codonset_show()
     st.write("""### 数据打分""")
     scores = []
     not_found = []

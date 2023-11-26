@@ -13,7 +13,7 @@ suzhu = "Cyberlindnera jadinii"
 suzhuweb = "https://www.ncbi.nlm.nih.gov/datasets/genome/?taxon=4903"
 suzhucodon = "codonset-cyj.txt"
 suzhudataset = "GCA_001661405.1"
-remote_codonset_path = f"/streamlit_app/CodonU/codonset/{suzhucodon}"
+remote_codonset_path = "/streamlit_app/CodonU/codonset/codonset-cyj.txt"
 # 确定文件上传的位置
 weizhi = "/streamlit_app/CodonU/cyj"
 
@@ -101,7 +101,7 @@ def data_slicing1(seq_input_upper):
 def codonset_show(remote_codonset_path):
     st.write(f"""### 显示{suzhu}密码子打分表""")
     sqldev_start()
-    local_codonset_path = f"data/{suzhucodon}"
+    local_codonset_path = "dat/codonset-cyj.txt"
     client.download_file(remote_codonset_path, to_path=local_codonset_path)
     codonset = pd.read_csv(local_codonset_path, sep='\t', header=None)
     codonset.columns = ['codon', 'abbc', 'num', 'percent', 'percent100', 'score']

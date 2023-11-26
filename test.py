@@ -85,7 +85,18 @@ st.sidebar.write("""## 序列上传方式2""")
 # 创建一个文件夹用于保存上传的文件
 if not os.path.exists("data"):
     os.makedirs("data")
+# --- 实现文件后台 --- #
+# 云盘配置
+from webdav4.client import Client
+JIANGUO_NAME = st.secrets["JIANGUO_NAME"]
+JIANGUO_TOKEN = st.secrets["JIANGUO_TOKEN"]
+client = Client(base_url='https://dav.jianguoyun.com/dav/',
+                auth=(JIANGUO_NAME, JIANGUO_TOKEN))
+# 指定本地保存下载文件的路径
+remote_file_path = '/streamlit_app/message123.txt'
+#local_file_path = file_path
 
+# --- 实现文件后台结束 --- #
 st.sidebar.write("请上传fasta类型的文件,fastq和txt也可以")
 uploaded_file = st.sidebar.file_uploader("选择文件", type=["fasta","fastq","txt"])
 # 保存文件并处理框架
@@ -95,6 +106,7 @@ if uploaded_file is not None:
     file_path = os.path.join("data", file_name)
     with open(file_path, "wb") as f:
         f.write(uploaded_file.getbuffer())
+    client.upload_file(from_path=file_path, to_path=remote_file_path, overwrite=True)#### 实现文件后台
     st.success(f"已保存文件: {file_path}")
     st.write("""### 开始处理以下序列数据""")
     records = []

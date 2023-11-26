@@ -78,7 +78,7 @@ if seq_input:
     codonset = codonset_show()
     df_scores =cal_score(codons,codonset)
     bar_chart(df_scores)
-
+    
     st.bar_chart(df_scores, x='num', y='score')
     st.write("""### 打分堆积图""")
     st.bar_chart(df_scores, x='codon', y='score')

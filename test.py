@@ -37,7 +37,17 @@ if st.button('点击找到R送你的一张风景图'):
     
     # 获取图像数据
     image_data = getDogeBytesIO()
-    pil_image = Image.open(io.BytesIO(image_data))
+    
+    # 调试语句，输出图像数据的长度
+    st.write(f"Image data length: {len(image_data)}")
+
+    try:
+        # 尝试打开图像
+        pil_image = Image.open(io.BytesIO(image_data))
+        st.write("Image opened successfully.")
+    except Exception as e:
+        # 打印异常信息
+        st.error(f"Error opening image: {e}")
 
     loading_bar.progress(1.0, '快看')
 

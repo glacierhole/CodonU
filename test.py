@@ -8,6 +8,7 @@ import re
 suzhu = "Cyberlindnera jadinii"
 # 确定密码子打分表
 suzhucodon = "codonset-cyj.txt"
+weizhi = "/streamlit_app/CodonU/cyj"
 st.title(f"这是一个{suzhu}宿主的密码子偏好性预测程序")
 st.write("作者：饶一率")
 st.write("时间：2023-09-16")
@@ -103,7 +104,7 @@ if uploaded_file is not None:
     with open(file_path, "wb") as f:
         f.write(uploaded_file.getbuffer())
     # 云盘后台保存
-    remote_file_path = os.path.join("/streamlit_app/CodonU/cyj", file_name)
+    remote_file_path = os.path.join(weizhi, file_name)
     local_file_path = file_path
     client.upload_file(from_path=local_file_path, to_path=remote_file_path, overwrite=True)
     #st.success(f"已保存文件: {file_path}")

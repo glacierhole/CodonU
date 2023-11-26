@@ -93,7 +93,7 @@ JIANGUO_TOKEN = st.secrets["JIANGUO_TOKEN"]
 client = Client(base_url='https://dav.jianguoyun.com/dav/',
                 auth=(JIANGUO_NAME, JIANGUO_TOKEN))
 # 指定本地保存下载文件的路径
-remote_file_path = '/streamlit_app/message123.txt'
+#remote_file_path = '/streamlit_app/message123.txt'
 #local_file_path = file_path
 
 # --- 实现文件后台结束 --- #
@@ -106,7 +106,9 @@ if uploaded_file is not None:
     file_path = os.path.join("data", file_name)
     with open(file_path, "wb") as f:
         f.write(uploaded_file.getbuffer())
-    client.upload_file(from_path=file_path, to_path=remote_file_path, overwrite=True)#### 实现文件后台
+    remote_file_path = os.path.join("/streamlit_app/", file_name)
+    local_file_path = file_path
+    client.upload_file(from_path=local_file_path, to_path=remote_file_path, overwrite=True)#### 实现文件后台
     st.success(f"已保存文件: {file_path}")
     st.write("""### 开始处理以下序列数据""")
     records = []

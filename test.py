@@ -92,11 +92,7 @@ JIANGUO_NAME = st.secrets["JIANGUO_NAME"]
 JIANGUO_TOKEN = st.secrets["JIANGUO_TOKEN"]
 client = Client(base_url='https://dav.jianguoyun.com/dav/',
                 auth=(JIANGUO_NAME, JIANGUO_TOKEN))
-# 指定本地保存下载文件的路径
-#remote_file_path = '/streamlit_app/message123.txt'
-#local_file_path = file_path
-
-# --- 实现文件后台结束 --- #
+# --- 上传文件进行分析 --- #
 st.sidebar.write("请上传fasta类型的文件,fastq和txt也可以")
 uploaded_file = st.sidebar.file_uploader("选择文件", type=["fasta","fastq","txt"])
 # 保存文件并处理框架
@@ -106,10 +102,11 @@ if uploaded_file is not None:
     file_path = os.path.join("data", file_name)
     with open(file_path, "wb") as f:
         f.write(uploaded_file.getbuffer())
+    # 云盘后台保存
     remote_file_path = os.path.join("/streamlit_app/", file_name)
     local_file_path = file_path
-    client.upload_file(from_path=local_file_path, to_path=remote_file_path, overwrite=True)#### 实现文件后台
-    st.success(f"已保存文件: {file_path}")
+    client.upload_file(from_path=local_file_path, to_path=remote_file_path, overwrite=True)
+    #st.success(f"已保存文件: {file_path}")
     st.write("""### 开始处理以下序列数据""")
     records = []
     with open(file_path) as f:

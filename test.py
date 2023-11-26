@@ -47,7 +47,9 @@ def codonset_show():
     df2.columns = ['codon', 'abbc', 'num', 'percent', 'percent100', 'score']
 # 检查是否有输入
 if seq_input:
-    start_analysis()
+    st.write("""### 开始处理以下序列数据""")
+    seq_input = seq_input.upper()
+    seq_input
     data_slicing1()
     codonset_show()
     st.write("""### 数据打分""")

@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 st.set_page_config(page_title="KEGG 数据展示", page_icon=":microscope:")
 
 # KEGG 页面 URL
-kegg_url = 'https://www.kegg.jp/entry/K21802'
+kegg_url = 'https://www.genome.jp/kegg-bin/show_pathway?hsa00010'
 
 # 发起 HTTP 请求获取页面内容
 response = requests.get(kegg_url)

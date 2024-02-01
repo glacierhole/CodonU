@@ -1,8 +1,12 @@
+import streamlit as st
 import requests
 from bs4 import BeautifulSoup
 
-# 替换为您要访问的 KEGG 页面的 URL
-kegg_url = 'https://www.genome.jp/kegg-bin/show_pathway?hsa00010'
+# Streamlit 页面布局设置
+st.set_page_config(page_title="KEGG 数据展示", page_icon=":microscope:")
+
+# KEGG 页面 URL
+kegg_url = 'https://www.kegg.jp/entry/K21802'
 
 # 发起 HTTP 请求获取页面内容
 response = requests.get(kegg_url)
@@ -12,13 +16,13 @@ if response.status_code == 200:
     # 使用 BeautifulSoup 解析 HTML
     soup = BeautifulSoup(response.text, 'html.parser')
 
-    # 在这里添加您的数据提取逻辑
-    # 以下示例提取标题和基因信息
-    title = soup.find('title').text
+    # 提取标题和基因信息
+    title = soup.find('Genes').text
     gene_info = soup.find('div', class_='pathway-disease-gene-table').text
 
-    # 打印结果
-    print(f'Title: {title}')
-    print(f'Gene Information: {gene_info}')
+    # Streamlit 中显示标题和基因信息
+    st.title(title)
+    st.text("Gene Information:")
+    st.text(gene_info)
 else:
-    print(f'Error: Unable to fetch data. Status Code: {response.status_code}')
+    st.error(f'Error: Unable to fetch data. Status Code: {response.status_code}')

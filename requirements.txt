@@ -5,4 +5,4 @@ webdav4 #联络网络云盘
 replicate # SD需要
 requests # SD需要
 streamlit-image-select # SD需要
-BeautifulSoup # 爬网页需要
+beautifulsoup4 # 爬网页需要

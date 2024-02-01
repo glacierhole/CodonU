@@ -17,7 +17,7 @@ if response.status_code == 200:
     soup = BeautifulSoup(response.text, 'html.parser')
 
     # 提取标题和基因信息
-    title = soup.find('Genes').text
+    title = soup.find('title').text
     gene_info = soup.find('div', class_='pathway-disease-gene-table').text
 
     # Streamlit 中显示标题和基因信息
